@@ -66,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     <style>
         .star { cursor: pointer; padding: 2px;}
         .star-active { color: gold; }
+        .carousel-img { width: 640px; height: 360px; }
     </style>
     <title><?= $destination->get_title() ?></title>
 </head>
@@ -75,43 +76,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     <main class="d-flex flex-column align-items-center">
 
-        <section class="mt-5 w-75 d-flex justify-content-between">
-
-            <div id="carouselExample" class="carousel slide carousel-fade flex-fill me-2">
+        <section class="mt-5 d-flex">
+            <div id="destinationCarousel" class="carousel slide carousel-fade flex-fill">
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <?php foreach ($destination->get_images() as $index => $image): ?>
+                        <button 
+                            type="button" 
+                            data-bs-target="#destinationCarousel" 
+                            data-bs-slide-to="<?= $index ?>" 
+                            <?= $index === 0 ? 'class="active" aria-current="true"' : '' ?>
+                            aria-label="Slide <?= $index + 1 ?>">
+                        </button>
+                    <?php endforeach; ?>
                 </div>
                 <div class="carousel-inner text-center">
-
-                <?php 
-                $is_first = true;
-                foreach ($destination->get_images() as $image)
-                {
-                    echo "<div class='carousel-item " . ($is_first ? "active" : "") . "'>
-                            <img src='/" . $image["path"] . "' class='img-fluid' alt='' style='width: 640px; height: 360px;'>
-                          </div>";
-                }
-                ?>
-
+                    <?php 
+                    foreach ($destination->get_images() as $index => $image): 
+                        $isActive = $index === 0 ? 'active' : '';
+                    ?>
+                        <div class="carousel-item <?= $isActive ?>">
+                            <img src="/<?= $image["path"] ?>" alt="Image <?= $index + 1 ?>" class="img-fluid carousel-img">
+                        </div>
+                    <?php endforeach; ?>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#destinationCarousel" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#destinationCarousel" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-
-            <div class="ms-5 flex-fill ms-2">
+            <div class="ms-5 flex-fill">
                 <h1><?= $destination->get_title() ?></h1>
                 <p><?= $destination->get_description() ?></p>
                 <?= Destination::get_rating_stars($destination->get_rating()); ?>
             </div>
-
         </section>
 
         <?php if ($is_logged_in): ?>
