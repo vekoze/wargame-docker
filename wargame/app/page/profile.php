@@ -88,7 +88,7 @@ if ($user_id != $_SESSION["user_id"]) {
       <?php
         if ($user->get_role() == "Admin")
         {
-          $default_url = "http://wapi:8080";
+          $default_url = "http://wapi:80";
           echo "<form id='stats' action='/stats' method='post'>
                   <input hidden name='url', value='" . $default_url . "'/>
                   <input type='submit' class='btn btn-primary mt-3' value='Afficher les statistiques du site'/>

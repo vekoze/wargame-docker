@@ -5,6 +5,8 @@ services:
     image: wargame
     ports:
       - "80:80"
+    networks:
+      - inter_service_net
     volumes:
       - ./wargame:/var/www/html/
 
@@ -12,5 +14,11 @@ services:
     image: wapi
     ports:
       - "8080:80"
+    networks:
+      - inter_service_net
     volumes:
       - ./wapi:/var/www/html
+
+networks:
+  inter_service_net:
+    driver: bridge
