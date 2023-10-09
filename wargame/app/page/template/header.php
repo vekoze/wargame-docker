@@ -11,7 +11,7 @@ $is_logged_in = isset($_SESSION["user_id"]);
 <header>
     <nav class="navbar navbar-expand-md bg-body-tertiary w-100">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">Voyage Insolite ✨</a>
+            <a class="navbar-brand" href="/">Voyage++ ✨</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

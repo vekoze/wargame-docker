@@ -39,9 +39,12 @@ if(!empty($user_id))
 
     <main>
         <div class="container">
-            <h1 class="mt-5 mb-5">Destinations disponibles :</h1>
+            <h1 class="mt-5 mb-5">Destinations :</h1>
             <div class="row">
-                <?php foreach (Destination::get_destinations() as $destination): ?>
+                <?php foreach (Destination::get_destinations() as $destination):
+                    $tabimages =  $destination->get_images();
+                    $first_image = reset($tabimages);// get the first element of the array
+                ?>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <a class="text-decoration-none" href="<?= "/destination/" . $destination->get_id();?>" class="card-link">
                         <div class="card">
@@ -51,7 +54,7 @@ if(!empty($user_id))
                             </div>
                             <!-- Centered and 75% width image with space at the bottom -->
                             <div class="text-center" style="margin-bottom: 20px;">
-                                <img src="https://media.istockphoto.com/id/832632796/fr/photo/paysages-abstraits-g%C3%A9om%C3%A9triques.jpg?s=612x612&w=0&k=20&c=zjTbVdPi4kif8IciXlXzUxuCh1EXs-e805oKXPQ1_so=" class="card-img img-fluid" style="width: 75%;" alt="<?= $destination->get_title() ?>">
+                                <img src="<?= $first_image["path"]; ?>" class="card-img img-fluid" style="width: 75%; height: 200px" alt="<?= $destination->get_title() ?>">
                             </div>
                             <!-- Absolute positioning for the larger rating stars -->
                             <div style="position: absolute; top: 10px; right: 10px; font-size: 24px;">
