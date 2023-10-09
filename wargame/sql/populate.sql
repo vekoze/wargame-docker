@@ -22,8 +22,6 @@ INSERT INTO Destinations (title, description) VALUES
 ('Sydney', 'A beautiful city on the east coast of Australia'),
 ('Cape Town', 'A stunning coastal city at the southern tip of South Africa');
 
-
-
 -- Populate Reviews table
 -- Assuming that each user comments on each destination
 INSERT INTO Reviews (comment, rating, id_User, id_Destination) VALUES
@@ -45,8 +43,19 @@ INSERT INTO Images (path, id_Destination) VALUES
 ('img/destination/paris3.jpg', 1),
 ('img/destination/ny1.jpg', 2),
 ('img/destination/ny2.jpg', 2),
+('img/destination/ny3.jpg', 2),
 ('img/destination/tokyo1.jpg', 3),
-('img/destination/tokyo2.jpg', 3);
+('img/destination/tokyo2.jpg', 3),
+('img/destination/tokyo3.jpg', 3),
+('img/destination/london1.jpg', 4),
+('img/destination/london2.jpg', 4),
+('img/destination/london3.jpg', 4),
+('img/destination/sydney1.jpg', 5),
+('img/destination/sydney2.jpg', 5),
+('img/destination/sydney3.jpg', 5),
+('img/destination/capetown1.jpg', 6),
+('img/destination/capetown2.jpg', 6),
+('img/destination/capetown3.jpg', 6);
 
 INSERT INTO SneakyTable (name) VALUES
 ('flag{Sh0uldv3_L1st3ned_ToM0m_NoR4wInPuts}');
