@@ -1,0 +1,16 @@
+version: "3"
+services:
+  www:
+    image: wargame
+    ports:
+      - "80:80"
+    volumes:
+      - ./wargame:/var/www/html/
+      - ./wargame/data:/var/www/html/data
+ 
+  api:
+    image: wargame-api
+    ports:
+      - "8080:80"
+    volumes:
+      - ./wargame-api:/var/www/html
