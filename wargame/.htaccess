@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteRule ^(.*)$ public/$1 [L]
+
+SetEnv DATABASE_PATH wargame.db
+SetEnv WARGAME-API-KEY flag{KnOcK_kNocK__WhOs_tHeRe?__SsRF}
