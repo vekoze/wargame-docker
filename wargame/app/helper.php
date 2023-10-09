@@ -5,9 +5,10 @@
 function sanitize_review_comment($comment)
 {
     $blacklist = [
-        "<script>",
-        "</script>",
-        "alert"
+        "<script>", "</script>",
+        "alert", "onload", "onerror", "onmouseover",
+        "src", "href", "img", "svg", "iframe",
+        "javascript:"
     ];
 
     foreach ($blacklist as $word)
