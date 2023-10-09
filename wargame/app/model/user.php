@@ -76,11 +76,8 @@ class User
     {
         $database = Database::get_connection();
 
-        $query = "SELECT id FROM Users WHERE username=:username LIMIT 1";
-        $sql3_stmt = $database->prepare($query);
-        $sql3_stmt->bindValue("username", $username);
-
-        $result = $sql3_stmt->execute();
+        $query = "SELECT id FROM Users WHERE username='" . $username . "' LIMIT 1";
+        $result = $database->query($query);
         $data = $result->fetchArray(SQLITE3_ASSOC);
 
         // Return the user if found, null otherwise

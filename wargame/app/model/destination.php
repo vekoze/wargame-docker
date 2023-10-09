@@ -20,7 +20,7 @@ class Destination
         $query = "SELECT * FROM Destinations WHERE id=:id LIMIT 1";
         $sql3_stmt = $database->prepare($query);
         $sql3_stmt->bindValue("id", $id);
-
+        
         $result = $sql3_stmt->execute();
         $data = $result->fetchArray(SQLITE3_ASSOC);
 
