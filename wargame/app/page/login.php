@@ -12,8 +12,6 @@ if (!is_null($user_id))
     exit();
 }
 
-$message = "";
-
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     $username = $_POST["username"] ?? "";
@@ -21,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     if (empty($username) || empty($password))
     {
-        $message = "Un ou plusieurs champs manquant(s).";
+        $_SESSION["feedback"] = ["type" => "danger", "message" => "Un ou plusieurs champs manquant(s)."];
         goto end;
     }
     
@@ -29,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     if (!$user)
     {
-        $message = "Utilisateur inexistant.";
+        $_SESSION["feedback"] = ["type" => "danger", "message" => "Utilisateur inexistant."];
         goto end;
     }
     
@@ -37,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     if ($password_md5 != $user->get_password())
     {
-        $message = "Mot de passe incorrect.";
+        $_SESSION["feedback"] = ["type" => "danger", "message" => "Mot de passe incorrect."];
         goto end;
     }
 
@@ -100,9 +98,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     </div>
     
     <?php
-        if (!empty($message))
+        if (isset($_SESSION["feedback"]))
         {
-            echo "<div class='alert alert-danger' role='alert'>" . $message . "</div>";
+            echo "<div class='alert alert-" . $_SESSION["feedback"]["type"] . "' role='alert'>" . $_SESSION["feedback"]["message"] . "</div>";
+            unset($_SESSION["feedback"]);
         }
     ?>
 

@@ -12,8 +12,6 @@ if (!is_null($user_id))
     exit();
 }
 
-$message = "";
-
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     $username = $_POST["username"] ?? "";
@@ -31,21 +29,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     // Check if email is valid
     if (!filter_var($email, FILTER_VALIDATE_EMAIL))
     {
-        $message = "Adresse email invalide.";
+        $_SESSION["feedback"] = ["type" => "danger", "message" => "Adresse email invalide."];
         goto end;
     }
 
     // Check if password and password_confirm are the same
     if ($password != $password_confirm)
     {
-        $message = "Les mots de passe ne correspondent pas.";
+        $_SESSION["feedback"] = ["type" => "danger", "message" => "Les mots de passe ne correspondent pas."];
         goto end;
     }
 
     // Check if user already exists
     if (User::get_from_username($username))
     {
-        $message = "Nom d'utilisateur déjà utilisé.";
+        $_SESSION["feedback"] = ["type" => "danger", "message" => "Nom d'utilisateur déjà utilisé."];
         goto end;
     }
     
@@ -110,9 +108,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     </div>
 
     <?php
-        if (!empty($message)) 
+        if (isset($_SESSION["feedback"]))
         {
-            echo "<div class='alert alert-danger' role='alert'>" . $message . "</div>";
+            echo "<div class='alert alert-" . $_SESSION["feedback"]["type"] . "' role='alert'>" . $_SESSION["feedback"]["message"] . "</div>";
+            unset($_SESSION["feedback"]);
         }
     ?>
 
