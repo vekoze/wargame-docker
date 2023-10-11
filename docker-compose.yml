@@ -9,11 +9,11 @@ services:
       - inter_service_net
     volumes:
       - ./wargame:/var/www/html/
+    depends_on:
+      - wapi
 
   wapi:
     image: wapi
-    ports:
-      - "8080:80"
     networks:
       - inter_service_net
     volumes:
@@ -21,4 +21,4 @@ services:
 
 networks:
   inter_service_net:
-    driver: bridge
+    internal: true
