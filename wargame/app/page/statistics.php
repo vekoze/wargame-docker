@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        'WARGAME-API-KEY: ' . getenv("WARGAME-API-KEY")
+        'WARGAME-API-KEY: flag{KnOcK_kNocK__WhOs_tHeRe?__SsRF}'
     ));
 
     $json_str = curl_exec($ch);
