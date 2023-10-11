@@ -11,6 +11,7 @@ services:
       - ./wargame:/var/www/html/
     depends_on:
       - wapi
+      - wsmtp
 
   wapi:
     image: wapi
@@ -18,6 +19,11 @@ services:
       - inter_service_net
     volumes:
       - ./wapi:/var/www/html
+
+  wsmtp:
+    image: namshi/smtp
+    networks:
+      - inter_service_net
 
 networks:
   inter_service_net:

@@ -2,7 +2,7 @@
 
 require_once PHPMAILER . "PHPMailerAutoload.php";
 
-session_start();
+if(session_status() !== PHP_SESSION_ACTIVE) session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
@@ -19,8 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     $mail = new PHPMailer();
     $mail->IsSMTP();
-    $mail->Host = "localhost";
-    $mail->Port = "9999";
+    $mail->Host = "wsmtp";
+    $mail->Port = 25;
 
     $mail->setFrom($email, "Wargame");
     $mail->addAddress('wargame@example.com', 'Wargame');
@@ -29,9 +29,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     
     if(!$mail->send())
     {
-        $message = "Le message n'a pas pu être envoyé (" . $mail->ErrorInfo . ")";
+        $_SESSION["feedback"] = ["type" => "danger", "message" => "Le message n'a pas pu être envoyé (" . $mail->ErrorInfo . ")"];
         goto end;
-    } 
+    }
 
     $_SESSION["feedback"] = ["type" => "success", "message" => "PHPMailer 5.2.16 : Le message a bien été envoyé"];
 
