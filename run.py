@@ -14,6 +14,7 @@ def run(command: str, comment: str, capture: bool = True) -> None:
         else:
             print(f"{RED}✕{RESET}")
             print(result.stderr.decode())
+            exit(-1)
     else:
         subprocess.run(command)
 
