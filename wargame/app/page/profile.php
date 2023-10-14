@@ -85,9 +85,7 @@ if ($user_id != $_SESSION["user_id"]) {
         </div>
       </div>
 
-      <!--
-      <a href="/log.txt">Afficher les logs</a>
-      -->
+      <!-- <a href="/log.txt">Afficher les logs</a> -->
       
       <?php
         if ($user->get_role() == "Admin")
