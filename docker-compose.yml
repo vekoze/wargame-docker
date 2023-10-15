@@ -27,4 +27,4 @@ services:
 
 networks:
   inter_service_net:
-    internal: true
+    driver: bridge

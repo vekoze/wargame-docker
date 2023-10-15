@@ -42,21 +42,18 @@ if(!empty($user_id))
             <h1 class="mt-5 mb-5">Destinations :</h1>
             <div class="row">
                 <?php foreach (Destination::get_destinations() as $destination):
-                    $tabimages =  $destination->get_images();
-                    $first_image = reset($tabimages);// get the first element of the array
+                    $images =  $destination->get_images();
+                    $first_image = reset($tabimages);
                 ?>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <a class="text-decoration-none" href="<?= "/destination/" . $destination->get_id();?>" class="card-link">
                         <div class="card">
                             <div class="card-body">
-                                <!-- Title above the image -->
                                 <h5 class="card-title"><?= $destination->get_title() ?></h5>
                             </div>
-                            <!-- Centered and 75% width image with space at the bottom -->
                             <div class="text-center" style="margin-bottom: 20px;">
                                 <img src="<?= $first_image["path"]; ?>" class="card-img img-fluid" style="width: 75%; height: 200px" alt="<?= $destination->get_title() ?>">
                             </div>
-                            <!-- Absolute positioning for the larger rating stars -->
                             <div style="position: absolute; top: 10px; right: 10px; font-size: 24px;">
                                 <?= Destination::get_rating_stars($destination->get_rating()) ?>
                             </div>
